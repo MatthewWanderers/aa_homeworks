@@ -1,17 +1,18 @@
 
+
 class Map
   def initialize
-    @arr_nest = []
+    @arr_nest = Array.new
   end
 
   def assign(key, value)
-    @arr_nest.push([key, value]) if @arr_nest.empty?
     idx = key?(key)
     if idx
-      @arr_nest[idx][1] = value
+      @@arr_nest[idx][1] = value
     else
       @arr_nest.push([key, value])
     end
+
   end
 
   def lookup(key)
@@ -26,8 +27,8 @@ class Map
 
   def key?(key)
     key_exists = false
-    @arr_nest.each_with_index do |pair, index|
-      key_exists = index if pair[0] == key
+    @arr_nest.each do |pair|
+      pair.include?(key) ? key_exists = pair : key_exists = nil
     end
   end
 
